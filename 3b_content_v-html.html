@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-html 设置标签的innerHTML</title>
+
+    <!-- 总结:
+        1. v-html 指令的作用是设置元素的innerHTML
+        2. 内容中有HTML结构会被解析为标签
+        3. v-text指令无论内容是什么,只会解析为文本
+        4. 解析文本实用v-text, 需要解析html结构使用v-html
+    -->
+
+    <!-- 导入Vue -->
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+    <div id="messages">
+        <!-- 打印结果: "<h1>这里是v-text</h1>" 这里的h1标签不会被解析 -->
+        <div v-text="message1"></div>
+        <!-- 打印结果: 这里是v-html,这里的h1标签会被解析出来 -->
+        <div v-html="message2"></div>
+    </div>
+    <script>
+        var app = new Vue({
+            el:"#messages",
+            data:{
+                message1:"<h1>这里是v-text</h1>",
+                message2:"<h1>这里是v-html</h1>"
+            }
+        })
+    </script>
+</body>
+</html>

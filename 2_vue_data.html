@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue的data类型</title>
+
+    <!-- Vue的data类型：总结
+        1. Vue中用到的数据定义在Vue对象的data中，
+        2. data中可以使用复杂类型的数据，
+        3. 渲染复杂类型数据时，遵守js的语法。如：对象的点语法，数组的索引语法
+    -->
+
+    <!-- 导入Vue.js -->
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="students_info">
+        <p>
+            <!-- 打印结果：
+                { "name": "蔡徐坤", "gender": "男", "age": "22", "hobbies": [ "唱", "跳", "RAP", "篮球" ] }
+            -->
+            {{ students }}  
+        </p>
+        <p>
+            <!-- 打印结果： 
+                姓名：蔡徐坤，
+                性别：男，
+                年龄：22，
+                爱好：唱, 跳, RAP, 篮球。
+            -->
+            姓名：{{ students.name }}，<br>
+            性别：{{ students.gender }}，<br>
+            年龄：{{ students.age }}，<br>
+            爱好：{{ students.hobbies[0] }},
+                {{ students.hobbies[1] }},
+                {{ students.hobbies[2] }},
+                {{ students.hobbies[3] }}。
+        </p>
+    </div>
+
+
+    <script>
+        var s_info = new Vue({
+            el:"#students_info",
+            data:{
+                students:{
+                    name : "蔡徐坤",
+                    gender : "男",
+                    age : "22",
+                    hobbies : ["唱","跳","RAP","篮球"]
+                },
+            }
+        })
+    </script>
+</body>
+</html>

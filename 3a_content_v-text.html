@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue指令 内容绑定</title>
+
+    <!-- Vue指令 以v-开头的语法 -->
+    <!-- 内容绑定的三种语法: v-text v-html 和 插值表达式 {{  }} -->
+    <!-- 前面介绍了 插值表达式, 这里继续介绍其他可以选择的语法格式,也就是通过使用v-指令 -->
+
+    <!-- 总结:
+        1. v-text指令的作用 : 设置标签的内容
+        2. 默认写法会替换全部内容, 而使用 {{  }} 可以替换指定内容
+        3. v-text指令 和 {{  }} 语法都支持在内部写表达式
+    
+    -->
+
+    <!-- 导入Vue -->
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+    <div id="hello">
+        <!-- 这两种写法都可以打印 "Hello Vue!!!" 字段 -->
+        <!-- 注意: 
+            使用v-text 指令,会将标签内部所有内容都替换成 "message",
+                类似JS的DOM元素.text;
+            而使用插值表达式只会将大括号替换为相应内容 -->
+        <h2 v-text="message + '!!!'">这里的测试内容会被覆盖</h2>
+        <h2>{{ message + "!!!"}}</h2>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: "#hello",
+            data: {
+                message: "Hello Vue"
+            }
+        })
+    </script>
+</body>
+
+</html>

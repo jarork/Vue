@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>计数器</title>
+
+    <!-- 导入Vue -->
+    <script src="js/vue.js"></script>
+
+    <style>
+        #container{
+            border: solid 1px violet;
+            overflow: hidden;
+            width: 180px;
+        }
+        .bar{
+            float: left;
+            height: 30px;
+            width: 33.33%;
+            line-height: 30px;
+            text-align: center;
+        }
+        #sub, #add{
+            background-color: pink;
+            font-size: 20px;
+        }
+        #sub:hover, #add:hover{
+            background-color: violet;
+        }
+        #sub:active, #add:active{
+            background-color: magenta;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div class="bar" id="sub" @click="sub">-</div>
+        <div class="bar" id="num">{{ number }}</div>
+        <div class="bar" id="add" @click="add">+</div>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: "#container",
+            data: {
+                number: 0
+            },
+            methods: {
+                sub(){
+                    console.log("sub 1");
+                    if (this.number < 1){
+                        this.number = 5;
+                    }
+                    else {
+                        this.number -= 1;
+                    }
+                },
+                add(){
+                    console.log("add 1");
+                    if (this.number >= 5){
+                        this.number = 0;
+                    }
+                    else{
+                        this.number += 1;
+                    }
+                }
+            },
+        })
+    </script>
+</body>
+</html>

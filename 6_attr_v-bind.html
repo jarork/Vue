@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-bind 修改元素属性</title>
+
+    <!-- 总结：v-bind指令 修改元素属性 
+
+        1. v-bind指令的作用是：为元素绑定属性
+        2. 完整写法为v-bind:属性名
+        3. 简易写法为      :属性名
+        
+    -->
+
+    <!-- 导入Vue -->
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="counter">
+        <input type="button" v-bind:value="prev_number" @click="add">
+        <input type="button" :value="next_number" @click="add">
+    </div>
+
+    <script>
+        var counter = new Vue({
+            el:"#counter",
+            data:{
+                next_number:1,
+                prev_number:0,
+            },
+            methods:{
+                add(){
+                    this.cur_number = this.next_number;
+                    this.next_number += this.prev_number;
+                    this.prev_number = this.cur_number
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-show指令 控制元素的显示和隐藏</title>
+
+    <!-- 总结：v-show 显示指令 
+    
+        1. v-show 指令的作用是根据真假切换元素的显示状态
+        2. 原理是修改元素的display，实现显示隐藏
+        3. 指令后面的内容， 最终都会被解析为布尔值
+        4. 值为true的元素显示，值为false的元素会被隐藏
+        5. 数据改变之后，对应元素的显示状态会同步更新
+
+    -->
+
+
+    <script src="js/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="profile">
+        <!-- 如果v-show后面的表达式是false，则不显示，反之亦然 
+                原理是切换元素style中的display  
+                如果v-show = false，那么display:none-->
+        <img src="./images/profile.jpeg" v-show="isShow">
+        <input type="button" value="显示/隐藏头像" id="btn" @click="show">
+    </div>
+
+    <script>
+        var profile = new Vue({
+            el: "#profile",
+            data: {
+                isShow: false,
+                btnValue: "显示头像"
+            },
+            methods: {
+                show() {
+                    this.isShow = !this.isShow;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

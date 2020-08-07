@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-for 循环遍历数组</title>
+
+    <!-- 总结：v-for遍历 
+    
+        1. v-for指令的作用是根据数据生成列表结构
+        2. 数组经常和v-for结合使用
+        3. 语法是( item, index ) in 数据
+        4. item 和 index 可以结合其他指令一起使用
+
+    -->
+
+    <!-- 导入Vue -->
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="list">
+        <ul>
+            <!-- 使用v-for获取array中的所有元素和索引 -->
+            <li v-for="(item, index) in array">{{ index+1 }} : {{ item }}</li>
+        </ul>
+
+        <ul>
+            <!-- 使用v-for获取obj中的所有元素 -->
+            <li v-for="item in obj">{{ item.city }}的人口是：{{ item.ppl }}</li>
+        </ul>
+
+        <input type="button" value="添加" v-on:click="insert">
+        <input type="button" value="删除顶部元素" @click="del_top">
+        <input type="button" value="删除底部元素" @click="del_bottom">
+
+    </div>
+
+
+    <script>
+        var data = new Vue({
+            el:"#list",
+            data:{
+                array:['a','b','c','d','e'],
+                obj:[
+                    {"city":"北京","ppl":"两千万"},
+                    {"city":"上海","ppl":"三千万"},
+                    {"city":"广州","ppl":"两千五百万"},
+                    {"city":"成都","ppl":"两千万"},
+                    {"city":"南京","ppl":"一千二百万"},
+                ]
+            },
+            methods:{
+                insert(){
+                    this.obj.push({"city":"新城市","ppl":"人口数"});
+                },
+                del_top(){
+                    this.obj.shift();
+                },
+                del_bottom(){
+                    this.obj.pop();
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

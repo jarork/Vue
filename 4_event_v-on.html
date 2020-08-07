@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-on 为元素绑定事件</title>
+
+    <!-- v-on 总结 
+    1. v-on指令的作用是为元素绑定事件
+    2. 事件名不需要写on，
+    3. 指令可以简写为@
+    4. 绑定的方法定义在Vue对象methods属性中
+    5. 方法内部通过this关键字可以访问定义在data中的数据。
+    -->
+
+    <!-- 加载Vue -->
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <!-- 使用v-on为元素绑定事件有两种写法 -->
+    <!-- 方法一  v-on:触发方式 = "函数名" -->
+    <!-- 方法二      @触发方式 = "函数名" -->
+    <input type="button" value="Click me..." id="btn" v-on:click="my_click" @mouseover="my_db_click">
+
+    <br><br>
+    
+    <div id="textbox">
+        <input type="text" id="box" @keyup.enter="enter">
+        <ul>
+            <li v-for="each in array">{{ each }}</li>
+        </ul>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: "#btn",
+            data:{
+                message1:"啊～被单击了！",
+                message2:"啊～进来了！",
+            },
+            methods:{
+                my_click(){
+                    // 使用this可以调用data中的数据。
+                    alert(this.message1);
+                },
+                my_db_click(){
+                    alert(this.message2);
+                },
+            }
+        })
+
+        var textbox = new Vue({
+            el: "#textbox",
+            data:{
+                array:[1,2,3]
+            },
+            methods:{
+                enter:function(){
+                    this.array.push(document.getElementById("box").value)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

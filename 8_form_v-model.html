@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-model指令 设置和获取表单元素的值</title>
+
+    <!-- 总结：v-model 设置和获取表单元素的值 
+    
+        1. v-model指令的作用是便捷的设置和获取表单元素的值
+        2. 绑定的数据回合表单元素的值相关联
+        3. 绑定的数据 和 表单元素的值是双向绑定的，一方修改，另一方也会被改变
+    
+    -->
+
+    <!-- 导入Vue -->
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="reg">
+        <!-- 表单，使用v-model指令，可以让表单数据和Vue对象数据是双向绑定的
+                无论修改谁，另一方都会跟着改变 -->
+        用户名：<input type="text" v-model="user">
+        邮箱：<input type="text" v-model=email @keyup.enter=submit>
+        <input type="submit" value="提交" @click=submit>
+
+        <!-- 显示数据 -->
+        <ul>
+            <li v-for="each_user in user_list">
+                用户： {{ each_user.name }} <br> 邮箱： {{ each_user.email }}
+            </li>
+            <li>
+                新用户： {{ user }}  {{ email }}
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        var my_form = new Vue({
+            el: "#reg",
+            data: {
+                user:"",
+                email:"",
+                user_list:[
+                    {"name":"张三","email":"zhangsan@yahoo.com"}
+                ]
+            },
+            methods: {
+                submit:function(){
+                    this.user_list.push({"name":this.user,"email":this.email})
+                    this.user = '';
+                    this.email = '';
+                }
+            }
+        })
+    </script>
+</body>
+</html>
