@@ -49,9 +49,9 @@
         <!-- 左侧 轮播图 -->
         <div class="banner">
             <!-- 录播图父元素 -->
-            <ul class="fader">
+            <ul class="fader" @mouseover="movein" @mouseout="moveout">
                 <!-- 这里使用JQ添加每一幻灯片的图 -->
-                <li class="slide active" v-for="(slide, i) in slides">
+                <li :class={slide:1,active:i==index} v-for="(slide, i) in slides">
                     <a href="#">
                         <img :src="['../static/images/'+ slide.img_url]" alt="">
                             <span class="img_info">{{ slide.img_info }}</span>
@@ -65,7 +65,7 @@
                     <div class="page next" data-target="next" @click="next">&gt;</div>
                     <!-- 轮播图小圆点页标 -->
                     <ul class="pager_list">
-                        <li v-for="dot in slides"></li>
+                        <li :class={active:i==index} v-for="(dot, i) in slides" @click=jump(i)></li>
                     </ul>
                 </li>
             </ul>
@@ -135,21 +135,50 @@
             },
             methods: {
                 prev:function(){
-                    
+                    if (this.index == 0){
+                        this.index = this.slides.length - 1;
+                    }
+                    else{
+                        this.index -= 1;
+                    }
                 },
                 next:function(){
+                    if (this.index >= this.slides.length - 1){
+                        this.index = 0;
+                    }
+                    else{
+                        this.index += 1;
+                    }
+                },
+                jump:function(i){
+                    this.index = i;
+                },
+                // 鼠标移入轮播图，自动播放暂停
+                movein() {
+                    clearInterval(window.slideTimer);
+                },
 
+                // 鼠标移出轮播图，自动播放重新开始
+                moveout() {
+                    slideTimer = setInterval(this.next, 1500);
                 }
             }
         })
 
+        // 实现轮播图的自动播放
+        var slideTimer = setInterval(this.fader.next, 1500);
+
         var blogs = new Vue({
             el: ".blogsbox",
             data: {
+                // 初始只加载头3条博客内容
                 articles: blogData.slice(0, 3),
             }
         })
 
+        
+
+        // 实现页面的滚动加载，页面接近底端则继续加载5条博客内容
         document.onscroll = function () {
             var scrollTop = document.documentElement.scrollTop
             var windowHeight = document.documentElement.clientHeight
